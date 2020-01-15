@@ -18,12 +18,18 @@ fx=893.390
 fy=898.32
 
 
-radian_theta=math.atan(cx/fy)
+radian_theta_x=math.atan(cx/fx)
+radian_theta_y=math.atan(cy/fy)
+
 
 #1 radian is 57.296 degrees
 radian_to_degree=57.296  
 
-degree_theta=radian_theta*57.296
-fov=2*degree_theta
+degree_theta_along_x=radian_theta_x*57.296
+degree_theta_along_y=radian_theta_y*57.296
 
-print("Field of view in degrees:",fov)
+
+fov_x=2*degree_theta_along_x
+fov_y=2*degree_theta_along_y
+print("Field of view in degrees along x-axix:",fov_x)
+print("Field of view in degrees along y-axix:",fov_y)
