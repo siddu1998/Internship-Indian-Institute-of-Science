@@ -1,8 +1,16 @@
-import matplotlib.pyplot as plt
 import cv2
 import pandas as pd
 import utm
 from scipy.spatial import distance
+
+
+
+
+
+#load data frame from csv
+def load_df(path):
+    df=pd.read_csv(path)
+    return df
 
 #get gps cordinates from utm
 def utm_to_gps(easting,northing,zone_number,zone_letter):
@@ -45,7 +53,4 @@ def get_fov_horizantal(cy,fy):
     degree_theta_along_y=radian_theta_y*57.296
     fov_y=2*degree_theta_along_y
     return fov_y
-
-
-
 
