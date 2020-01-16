@@ -8,4 +8,8 @@ From the concept of photometry of a pinhole camera, we know that the image plane
 
 These values are subjected to little errors from the industry specified GoPro Specifications. We can easily correspond to the original values mentioned on their website which are as follows: 
 
+focal length in mm = 21.9 mm
+FOV along x-axis   = 94.4 mm
+FOV along y-axis   = 55   mm
+FOV along z-axis   = 107.1mm
 
