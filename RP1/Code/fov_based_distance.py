@@ -1,7 +1,6 @@
 #python imports
 import cv2
 import math
-
 #Custom modules
 import helper
 
@@ -31,5 +30,7 @@ degree_theta_along_y=radian_theta_y*57.296
 
 fov_x=2*degree_theta_along_x
 fov_y=2*degree_theta_along_y
+
 print("Field of view in degrees along x-axix:",fov_x)
 print("Field of view in degrees along y-axix:",fov_y)
+
