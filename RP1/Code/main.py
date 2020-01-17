@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 camera_cordinates_path=input('Please enter camera cordinates ')
 camera_cordinates_df= load_df(camera_cordinates_path)
-    
+
 #this is from gps
 camera_cordinates_df['lat'],camera_cordinates_df['lon']=utm_to_gps(camera_cordinates_df['x_gps'],camera_cordinates_df['y_gps'],32,'N')
 
@@ -26,12 +26,6 @@ ax.set_title('Drone Path')
 plt.show()
 
 
-gps_bottom_left = (lat1,long1)
-gps_top_left = (lat2,long2)
-gps_top_right=(lat3,long3)
-gps_bottom_right=(lat4,long4)
-
-area_covered=k
 
 
 
