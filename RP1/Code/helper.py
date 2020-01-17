@@ -2,6 +2,7 @@ import cv2
 import pandas as pd
 import utm
 from scipy.spatial import distance
+import navpy
 
 #load data frame from csv
 def load_df(path):
@@ -42,3 +43,18 @@ def get_fov_horizantal(cy,fy):
     fov_y=2*degree_theta_along_y
     return fov_y
 
+
+
+def DataFrameLLA2Cartesian(df):
+
+    LAT_REF = 33.79588248
+    LON_REF = -84.24924553
+    ALT_REF = 200
+    lon = df["lon"].values
+    lat = df["lat"].values
+    alt = df["alt"].values
+    cartesian = navpy.lla2ned(lat, lon, alt,LAT_REF, LON_REF, ALT_REF,latlon_unit='deg', alt_unit='m', model='wgs84')
+    df['x_cart'] = cartesian[:, 0]
+    df['y_cart'] = cartesian[:, 1]
+    df['z_cart'] = cartesian[:, 2]
+    return df

@@ -7,9 +7,11 @@ from helper import *
 import matplotlib.pyplot as plt
 
 
+
+
 camera_cordinates_path=input('Please enter camera cordinates ')
 camera_cordinates_df= load_df(camera_cordinates_path)
-    
+
 #this is from gps
 camera_cordinates_df['lat'],camera_cordinates_df['lon']=utm_to_gps(camera_cordinates_df['x_gps'],camera_cordinates_df['y_gps'],32,'N')
 
@@ -24,6 +26,9 @@ ax.scatter(camera_cordinates_df['lat'], camera_cordinates_df['lon'],camera_cordi
 ax.scatter(camera_cordinates_df['lat_gt'], camera_cordinates_df['lon_gt'],camera_cordinates_df['z_gt'],s=3 ,color='b')
 ax.set_title('Drone Path')
 plt.show()
+
+
+
 
 
 gps_bottom_left = (lat1,long1)
