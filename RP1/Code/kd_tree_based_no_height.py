@@ -51,6 +51,9 @@ query_point = np.array([x_query,y_query]).reshape(1,-1)
 query_return = kdtree.query_ball_point(query_point,r=5)
 print('[INFO] The above images are at a spherical radius of 5m')
 
+
+
+
 #=================TODO=====================
 """
 This is a spherical query, this contains points above, 
