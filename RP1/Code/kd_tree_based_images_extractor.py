@@ -25,7 +25,7 @@ print("[INFO] Building a tree of all DRONE coordinates")
 
 X = drone_cordinates_in_cartesian_df[["x_cart", "y_cart", "z_cart"]].values
 
-print(X)
+#print(X)
 
 kdtree = cKDTree(X)
 print("[INFO] Finished buidling the tree")
@@ -47,9 +47,9 @@ print("[INFO] Starting Spherical Search of 20meters")
 query_point = np.array([x_query,y_query,z_query]).reshape(1,-1)
 #the query will return indices from the onboard gps sheets which are nearly
 # at a distance of 60 meters from the query point
-query_return = kdtree.query_ball_point(query_point,r=60)
+query_return = kdtree.query_ball_point(query_point,r=5)
 print(query_return)
-print('[INFO] All the above indices correpond to image id' )
+print('[INFO] All the above indices correspond to image id' )
 
 """
 TODO:
