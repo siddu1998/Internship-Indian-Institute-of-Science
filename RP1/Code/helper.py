@@ -4,6 +4,9 @@ import utm
 from scipy.spatial import distance
 import navpy
 
+#custom util imports
+import constants
+
 #load data frame from csv
 def load_df(path):
     df=pd.read_csv(path)
@@ -47,9 +50,10 @@ def get_fov_horizantal(cy,fy):
 
 def DataFrameLLA2Cartesian(df):
 
-    LAT_REF = 47.3717306
-    LON_REF = 8.5386279
-    ALT_REF = 450
+    LAT_REF = constants.LAT_REF
+    LON_REF = constants.LON_REF
+    ALT_REF = constants.ALT_REF
+    
     lon = df["lon"].values
     lat = df["lat"].values
     alt = df["alt"].values

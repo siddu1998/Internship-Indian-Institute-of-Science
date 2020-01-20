@@ -7,14 +7,14 @@ import os
 import matplotlib.pyplot as plt
 
 from helper import *
- 
+import time
 
-LAT_REF = 47.3717306
-LON_REF = 8.5386279
-ALT_REF = 450
+LAT_REF = constants.LAT_REF
+LON_REF = constants.LON_REF
+ALT_REF = constants.ALT_REF
 
 print('[INFO] Enter Onboard GPS Data Sheet')
-drone_cordinates_path=input("enter file path")
+drone_cordinates_path=input("enter file path: ")
 
 print('[INFO] Loading Data Sheet')
 drone_cordinates_df= load_df(drone_cordinates_path)
@@ -25,34 +25,40 @@ print("[INFO] Building a tree of all DRONE coordinates")
 
 X = drone_cordinates_in_cartesian_df[["x_cart", "y_cart", "z_cart"]].values
 
-#print(X)
-
+start_time = time.time()
 kdtree = cKDTree(X)
-print("[INFO] Finished buidling the tree")
+print("[INFO] Finished buidling the tree in {}".format(time.time() - start_time))
+flag=0
+
+while flag!=-1:
+	print('[USER] Please enter your query points')
+	query_point_lat=float(input("Lat: "))
+	query_point_lon=float(input("Lon: "))
+	query_point_alt=float(input("Alt: "))
 
 
-print('[USER] Please enter your query points')
-query_point_lat=float(input())
-query_point_lon=float(input())
-query_point_alt=float(input())
+	print('[INFO] Converting query points to cartesian')
+	x_query, y_query, z_query = navpy.lla2ned(query_point_lat,query_point_lon,query_point_alt,
+										LAT_REF, LON_REF, ALT_REF,
+										latlon_unit='deg', alt_unit='m', model='wgs84')
+		
 
 
-print('[INFO] Converting query points to cartesian')
-x_query, y_query, z_query = navpy.lla2ned(query_point_lat,query_point_lon,query_point_alt,
-									LAT_REF, LON_REF, ALT_REF,
-									latlon_unit='deg', alt_unit='m', model='wgs84')
-	
+	query_point = np.array([x_query,y_query,z_query]).reshape(1,-1)
+	query_radius=int(input("[INFO] Please enter Query Radius in meteres: "))
+	print("[INFO] Starting Spherical Search of {}".format(query_radius))	
+	start_time = time.time()
+	query_return = kdtree.query_ball_point(query_point,r=query_radius)
+	exec_time=(time.time() - start_time)
 
-print("[INFO] Starting Spherical Search of 20meters")
-query_point = np.array([x_query,y_query,z_query]).reshape(1,-1)
-#the query will return indices from the onboard gps sheets which are nearly
-# at a distance of 60 meters from the query point
-query_return = kdtree.query_ball_point(query_point,r=5)
-print(query_return)
-print('[INFO] All the above indices correspond to image id' )
 
+	print(query_return)
+	print('[INFO] Query exection done in {} '.format(exec_time) )
+	flag=int(input("[INFO] Press -1 to STOP or anyother number for next query"))
+
+
+#=================TODO=====================
 """
-TODO:
 This is a spherical query, this contains points above, 
 ahead/bheind and a lot of other spurious points read 
 more papers and write code to eliminate the points 

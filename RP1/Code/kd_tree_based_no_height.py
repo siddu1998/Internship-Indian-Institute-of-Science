@@ -7,14 +7,15 @@ import os
 import matplotlib.pyplot as plt
 
 from helper import *
+import constants
 
 #tentative can choose better origin for more better results (have to play around with the possible values)
-LAT_REF = 47.3717306
-LON_REF = 8.5386279
-ALT_REF = 450
+LAT_REF = constants.LAT_REF
+LON_REF = constants.LON_REF
+ALT_REF = constants.ALT_REF
 
 print('[INFO] Enter Onboard GPS Data Sheet')
-drone_cordinates_path=input("enter file path")
+drone_cordinates_path=input("enter file path: ")
 
 print('[INFO] Loading Data Sheet')
 drone_cordinates_df= load_df(drone_cordinates_path)
@@ -50,18 +51,13 @@ query_point = np.array([x_query,y_query]).reshape(1,-1)
 query_return = kdtree.query_ball_point(query_point,r=5)
 print('[INFO] The above images are at a spherical radius of 5m')
 
+#=================TODO=====================
 """
-TODO:
 This is a spherical query, this contains points above, 
 ahead/bheind and a lot of other spurious points read 
 more papers and write code to eliminate the points 
 which are captured ahead/behind.
 """
-
-
-
-
-
 
 
 
