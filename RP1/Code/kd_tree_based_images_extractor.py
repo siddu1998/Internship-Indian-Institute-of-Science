@@ -43,11 +43,20 @@ x_query, y_query, z_query = navpy.lla2ned(query_point_lat,query_point_lon,query_
 									latlon_unit='deg', alt_unit='m', model='wgs84')
 	
 
-print(x_query,y_query,z_query)
 print("[INFO] Starting Spherical Search of 20meters")
 query_point = np.array([x_query,y_query,z_query]).reshape(1,-1)
-print(query_point)
-query_return = kdtree.query_ball_point(query_point,r=60)
 #the query will return indices from the onboard gps sheets which are nearly
-# at a distance of 30 meters from the query point
+# at a distance of 60 meters from the query point
+query_return = kdtree.query_ball_point(query_point,r=60)
 print(query_return)
+print('[INFO] All the above indices correpond to image id' )
+
+"""
+TODO:
+This is a spherical query, this contains points above, 
+ahead/bheind and a lot of other spurious points read 
+more papers and write code to eliminate the points 
+which are captured ahead/behind.
+"""
+
+

@@ -47,10 +47,7 @@ print(query_point)
 query_return = kdtree.query_ball_point(query_point,r=60)
 #the query will return indices from the onboard gps sheets which are nearly
 # at a distance of 20 meters from the query point
-for i,j in drone_cordinates_df.iterrows():
-	print(i)
-	if i==10:
-		break
+
 
 
 
