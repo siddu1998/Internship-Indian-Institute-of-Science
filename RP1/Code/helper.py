@@ -47,9 +47,9 @@ def get_fov_horizantal(cy,fy):
 
 def DataFrameLLA2Cartesian(df):
 
-    LAT_REF = 33.79588248
-    LON_REF = -84.24924553
-    ALT_REF = 200
+    LAT_REF = 47.3717306
+    LON_REF = 8.5386279
+    ALT_REF = 450
     lon = df["lon"].values
     lat = df["lat"].values
     alt = df["alt"].values

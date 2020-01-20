@@ -21,7 +21,7 @@ camera_cordinates_df['lat_gt'],camera_cordinates_df['lon_gt']=utm_to_gps(camera_
 fig=plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(camera_cordinates_df['lat'], camera_cordinates_df['lon'],camera_cordinates_df['z_gps'],s=3 ,color='r')
-ax.scatter(camera_cordinates_df['lat_gt'], camera_cordinates_df['lon_gt'],camera_cordinates_df['z_gt'],s=3 ,color='b')
+#ax.scatter(camera_cordinates_df['lat_gt'], camera_cordinates_df['lon_gt'],camera_cordinates_df['z_gt'],s=3 ,color='b')
 ax.set_title('Drone Path')
 plt.show()
 
