@@ -4,6 +4,7 @@ import utm
 from scipy.spatial import distance
 import navpy
 import os
+from darkflow.net.build import TFNet
 
 #custom util imports
 import constants
@@ -68,7 +69,8 @@ def DataFrameLLA2Cartesian(df):
     df['z_cart'] = cartesian[:, 2]
     return df
 
-def batch_detection(folder):    
+def batch_detection(folder):   
+     
     tfnet_model = TFNet(constants.options)
     for filename in os.listdir(folder):
         img = cv2.imread(os.path.join(folder,filename))

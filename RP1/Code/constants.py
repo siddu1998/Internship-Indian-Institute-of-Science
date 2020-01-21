@@ -6,8 +6,7 @@ ALT_REF = 450
 
 #Object detection model settings for yolo/tiny-yolo
 options = {
-                "model": "yolo.cfg",
-                "load": "weights.weights",
+                "model": "darkflow/cfg/yolo.cfg",
+                "load": "darkflow/bin/yolo.weights",
                 "threshold": 0.50,
-                "labels":"labels.txt"
             }
