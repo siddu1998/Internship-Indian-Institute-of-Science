@@ -4,9 +4,6 @@ import time
 import cv2
 import os
 
-
-
-
 options = {
                 "model": "darkflow/cfg/yolo.cfg",
                 "load": "darkflow/bin/yolov2.weights",
@@ -14,7 +11,7 @@ options = {
                 "confidence":0.3,
                 "labelsPath":"darkflow/coco.names"
             }
-            
+
 np.random.seed(42)
 LABELS = open(options['labelsPath']).read().strip().split("\n")
 COLORS = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
