@@ -56,11 +56,9 @@ def get_fov_horizantal(cy,fy):
 
 
 def DataFrameLLA2Cartesian(df):
-
     LAT_REF = constants.LAT_REF
     LON_REF = constants.LON_REF
     ALT_REF = constants.ALT_REF
-
     lon = df["lon"].values
     lat = df["lat"].values
     alt = df["alt"].values
@@ -70,28 +68,11 @@ def DataFrameLLA2Cartesian(df):
     df['z_cart'] = cartesian[:, 2]
     return df
 
-
-
-def load_model():  
-    pass  
-
-def batch_detection(folder):
-    
-    #TODO change options
-    options = {
-                "model": "yolo.cfg",
-                "load": "weights.weights",
-                "threshold": 0.50,
-                "labels":"labels.txt"
-            }
-
-    #load model based on above options/settings
-    tfnet_model = TFNet(options_fruits)
-
-    #iterate through images and perform detection
+def batch_detection(folder):    
+    tfnet_model = TFNet(constants.options)
     for filename in os.listdir(folder):
         img = cv2.imread(os.path.join(folder,filename))
         if img is not None:
             print(filename,tfnet_model.return_predict(img))
 
-        
+print(constants.options)
