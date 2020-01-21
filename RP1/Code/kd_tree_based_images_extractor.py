@@ -55,12 +55,3 @@ while flag!=-1:
 	print(query_return)
 	print('[INFO] Query exection done in {} '.format(exec_time) )
 	flag=int(input("[INFO] Press -1 to STOP or anyother number for next query"))
-
-
-#=================TODO=====================
-"""
-This is a spherical query, this contains points above, 
-ahead/bheind and a lot of other spurious points read 
-more papers and write code to eliminate the points 
-which are captured ahead/behind.
-"""
