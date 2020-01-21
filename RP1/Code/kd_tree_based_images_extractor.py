@@ -64,5 +64,3 @@ ahead/bheind and a lot of other spurious points read
 more papers and write code to eliminate the points 
 which are captured ahead/behind.
 """
-
-
