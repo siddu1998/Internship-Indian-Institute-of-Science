@@ -72,19 +72,26 @@ def DataFrameLLA2Cartesian(df):
 
 
 
-def load_model():    
+def load_model():  
+    pass  
 
 def batch_detection(folder):
-
-    model=load_model()
     
+    #TODO change options
+    options = {
+                "model": "yolo.cfg",
+                "load": "weights.weights",
+                "threshold": 0.50,
+                "labels":"labels.txt"
+            }
 
-    images = []
+    #load model based on above options/settings
+    tfnet_model = TFNet(options_fruits)
+
+    #iterate through images and perform detection
     for filename in os.listdir(folder):
         img = cv2.imread(os.path.join(folder,filename))
         if img is not None:
-            images.append(img)
+            print(filename,tfnet_model.return_predict(img))
 
-
-
-    return images
+        
