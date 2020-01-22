@@ -19,7 +19,7 @@ COLORS = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
 net = cv2.dnn.readNetFromDarknet(options['model'], options['load'])
 
 image=cv2.imread('00001.jpg')
-image=cv2.resize(image,(900,450))
+#image=cv2.resize(image,(900,450))
 
 (H, W) = image.shape[:2]
  

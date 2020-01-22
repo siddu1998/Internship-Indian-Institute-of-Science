@@ -70,7 +70,7 @@ def DataFrameLLA2Cartesian(df):
     return df
 
 def batch_detection(folder):   
-     
+
     tfnet_model = TFNet(constants.options)
     for filename in os.listdir(folder):
         img = cv2.imread(os.path.join(folder,filename))
