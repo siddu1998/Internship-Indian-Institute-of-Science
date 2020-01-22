@@ -4,7 +4,6 @@ import utm
 from scipy.spatial import distance
 import navpy
 import os
-from darkflow.net.build import TFNet
 
 #custom util imports
 import constants
@@ -76,5 +75,3 @@ def batch_detection(folder):
         img = cv2.imread(os.path.join(folder,filename))
         if img is not None:
             print(filename,tfnet_model.return_predict(img))
-
-print(constants.options)

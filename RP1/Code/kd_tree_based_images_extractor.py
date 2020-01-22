@@ -55,3 +55,7 @@ while flag!=-1:
 	print(query_return)
 	print('[INFO] Query exection done in {} '.format(exec_time) )
 	flag=int(input("[INFO] Press -1 to STOP or anyother number for next query"))
+
+
+for row,value in drone_cordinates_in_cartesian_df:
+	print('row value: {}','value: {}'.format(row,value))
