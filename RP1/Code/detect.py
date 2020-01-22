@@ -23,7 +23,7 @@ import constants
 options = constants.options
 np.random.seed(42)
 LABELS = open(options['labelsPath']).read().strip().split("\n")
-color = (0,0,0)
+color = (255,0,255)
 
 
 
@@ -110,6 +110,6 @@ if len(idxs) > 0:
 		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
 		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5, color, 2)
- 
+image=cv2.resize(image,(900,450))
 cv2.imshow("Image", image)
 cv2.waitKey(0)
