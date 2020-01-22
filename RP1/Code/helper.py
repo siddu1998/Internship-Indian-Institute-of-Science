@@ -68,7 +68,7 @@ def DataFrameLLA2Cartesian(df):
     df['z_cart'] = cartesian[:, 2]
     return df
 
-def batch_detection(folder):   
+def batch_detection(query_list):   
 
     tfnet_model = TFNet(constants.options)
     for filename in os.listdir(folder):

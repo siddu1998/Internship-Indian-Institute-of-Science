@@ -54,8 +54,14 @@ while flag!=-1:
 
 	print(query_return)
 	print('[INFO] Query exection done in {} '.format(exec_time) )
-	flag=int(input("[INFO] Press -1 to STOP or anyother number for next query"))
+	if len(query_return[0])>1:
+		user_option=input('[USER] Do you want to perform object detection on the query results Y/n: ')
+		if user_option=='Y' or user_option=='y':
+			print('[INFO] Detecting..... using model YOLOv2 on TF2.0')
+		else:
+			print('[INFO] Not executing detection')
+
+	
+	flag=int(input("[USER] Press -1 to STOP or anyother number for next query: "))
 
 
-for row,value in drone_cordinates_in_cartesian_df:
-	print('row value: {}','value: {}'.format(row,value))
