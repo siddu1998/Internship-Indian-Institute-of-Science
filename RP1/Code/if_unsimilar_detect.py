@@ -11,11 +11,11 @@ Objectives:
 from scipy.spatial import distance as dist
 import matplotlib.pyplot as plt
 import numpy as np
-import argparse
-import glob
 import cv2
 
 import helper
+
+
 import imutils
 
 

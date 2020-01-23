@@ -1,3 +1,3 @@
-import constants
-
-print(constants.LAT_REF)
+a=[99,1,2,3]
+a.sort()
+print(a)
