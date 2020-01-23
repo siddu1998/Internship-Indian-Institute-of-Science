@@ -13,3 +13,5 @@ Objectives:
 
 import cv2
 
+def simillar(path_image1,path_image2):
+    
