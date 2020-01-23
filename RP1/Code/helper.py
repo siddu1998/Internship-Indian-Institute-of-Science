@@ -91,7 +91,3 @@ def break_video_to_frame(input_path):
         success,image = vidcap.read()
         print('Read a new frame {}: '.format(count), success)
         count += 1
-
-print('[INFO] Starting process')
-break_video_to_frame('/home/sid/Desktop/research_videos/VIRAT_S_000001.mp4')
-print('[INFO] Finished Conversion')
