@@ -79,3 +79,15 @@ def batch_detection(query_list):
         img = cv2.imread(os.path.join(folder,filename))
         if img is not None:
             print(filename,tfnet_model.return_predict(img))
+
+
+
+def break_video_to_frame(input_path,output_path):
+    vidcap = cv2.VideoCapture(input_path_video)
+    success,image = vidcap.read()
+    count = 0
+    while success:
+    cv2.imwrite("frame%d.jpg" % count, image)     # save frame as JPEG file      
+    success,image = vidcap.read()
+    print('Read a new frame: ', success)
+    count += 1
