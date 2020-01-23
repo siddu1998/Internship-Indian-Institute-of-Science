@@ -17,14 +17,13 @@ import time
 import cv2
 import os
 
-### MY CUSTOM IMPORTS
+# MY CUSTOM IMPORTS
 import constants
 
 options = constants.options
 np.random.seed(42)
 LABELS = open(options['labelsPath']).read().strip().split("\n")
-color = (255,0,255)
-
+color = (255, 0, 255)
 
 
 """
@@ -47,10 +46,10 @@ net = cv2.dnn.readNetFromDarknet(options['model'], options['load'])
 """
 Test Image
 """
-image=cv2.imread('00001.jpg')
+image = cv2.imread('save.jpg')
 
 (H, W) = image.shape[:2]
- 
+
 
 """
  In CV2.dnn you load a model and then forward propgate the image for prediction, 
@@ -65,7 +64,7 @@ image=cv2.imread('00001.jpg')
 """
 ln = net.getLayerNames()
 ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
- 
+
 
 """
 blob : the cv.dnn does not take a raw image, instead takes a blob,
@@ -73,13 +72,14 @@ A blob is an image which is modified and smoothed as per the network requirments
 
 For Ex: YOLO takes in an image only of the size 416 x 416 (single channel) hence we reduce each color
 from [0-255] to [0-1] and image size (416,416)
-""" 
-blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),swapRB=True, crop=False)
+"""
+blob = cv2.dnn.blobFromImage(
+    image, 1 / 255.0, (416, 416), swapRB=True, crop=False)
 net.setInput(blob)
 start = time.time()
 layerOutputs = net.forward(ln)
 end = time.time()
- 
+
 # show timing information on YOLO
 print("[INFO] YOLO took {:.6f} seconds".format(end - start))
 
@@ -100,16 +100,18 @@ for output in layerOutputs:
             confidences.append(float(confidence))
             classIDs.append(classID)
 
-idxs = cv2.dnn.NMSBoxes(boxes, confidences,options['confidence'],options['threshold'])
+idxs = cv2.dnn.NMSBoxes(
+    boxes, confidences, options['confidence'], options['threshold'])
 
 if len(idxs) > 0:
-	for i in idxs.flatten():
-		# extract the bounding box coordinates
-		(x, y) = (boxes[i][0], boxes[i][1])
-		(w, h) = (boxes[i][2], boxes[i][3])
-		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5, color, 2)
-image=cv2.resize(image,(900,450))
+    for i in idxs.flatten():
+        # extract the bounding box coordinates
+        (x, y) = (boxes[i][0], boxes[i][1])
+        (w, h) = (boxes[i][2], boxes[i][3])
+        cv2.rectangle(image, (x, y), (x + w, y + h), color, 3)
+        text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
+        print(text)
+        cv2.putText(image, text, (x, y - 5),cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+
 cv2.imshow("Image", image)
 cv2.waitKey(0)
