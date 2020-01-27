@@ -46,7 +46,7 @@ net = cv2.dnn.readNetFromDarknet(options['model'], options['load'])
 """
 Test Image
 """
-image = cv2.imread('check_output.jpg')
+image = cv2.imread('testing_images/check_output.jpg')
 (H, W) = image.shape[:2]
 
 
@@ -112,6 +112,6 @@ if len(idxs) > 0:
         print(text)
         cv2.putText(image, text, (x, y - 5),cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-image=cv2.resize(image,(600,600))
+#image=cv2.resize(image,(600,600))
 cv2.imshow("Image", image)
 cv2.waitKey(0)
