@@ -11,8 +11,9 @@ Objectives:
 from scipy.spatial import distance as dist
 import matplotlib.pyplot as plt
 import numpy as np
-import cv2
 
+import cv2
+from matplotlib import pyplot as plt
 import helper
 
 
@@ -27,6 +28,10 @@ import time
 def histogram_matching(path_image1, path_image2):
     img1 = cv2.imread(path_image1)
     img2 = cv2.imread(path_image2)
+    plt.hist(img1.ravel(),256,[0,256])
+    plt.show()
+    plt.hist(img2.ravel(),256,[0,256])
+    plt.show()
 
     img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
@@ -42,7 +47,7 @@ def histogram_matching(path_image1, path_image2):
     #a = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL) ----->Waste!
     a = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CHISQR)
     print('time histogram mapping',time.time()-start_time)
-    
+
     print(a)
 
 
@@ -65,6 +70,9 @@ def image_subtraction(path_image1,path_image2):
     img1 = cv2.imread(path_image1)
     img2 = cv2.imread(path_image2)
 
+    img1=cv2.resize(img1,(800,600))
+    img2=cv2.resize(img2,(800,600))
+
     start_time=time.time()
     grayA = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     grayB = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
@@ -79,11 +87,12 @@ def image_subtraction(path_image1,path_image2):
     cnts = imutils.grab_contours(cnts)
 
     if len(cnts)>0:
-        print(len(cnts))
+        #print(len(cnts))
         biggest_cnt=max(cnts, key = cv2.contourArea)
         print("Difference in scene")
         print('biggest_difference',cv2.contourArea(biggest_cnt))
-        return biggest_cnt
+    else:
+        print('No Difference!')
     
     print(time.time()-start_time)
     
@@ -91,22 +100,22 @@ def image_subtraction(path_image1,path_image2):
     Uncomment below to visualize
     """
 
-    # for c in cnts:
-    #     (x, y, w, h) = cv2.boundingRect(c)
+    for c in cnts:
+        (x, y, w, h) = cv2.boundingRect(c)
         
-    #     cv2.rectangle(img1, (x, y), (x + w, y + h), (0, 0, 255), 2)
-    #     cv2.rectangle(img2, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.rectangle(img1, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.rectangle(img2, (x, y), (x + w, y + h), (0, 0, 255), 2)
     
-    # cv2.imshow("Scene 1", img1)
-    # cv2.imshow("Scene 2", img2)
-    # #cv2.imwrite('save.jpg',diff)
-    # cv2.imshow("Diff", diff)
-    # cv2.waitKey(0)
+    cv2.imshow("Scene 1", img1)
+    cv2.imshow("Scene 2", img2)
+    #cv2.imwrite('save.jpg',diff)
+    cv2.imshow("Diff", diff)
+    cv2.waitKey(0)
     
  
 
 
-image_path_1='4561.jpg'
+image_path_1='2.jpg'
 image_path_2='4360.jpg'
 
 print(histogram_matching(image_path_1,image_path_2))
