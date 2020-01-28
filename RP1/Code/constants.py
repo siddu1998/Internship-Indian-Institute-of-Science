@@ -13,3 +13,11 @@ options = {
                 "labelsPath":"darkflow/coco.names"
             }
             
+options_v3 = {
+                "model": "darkflow/cfg/yolov3.cfg",
+                "load": "darkflow/bin/yolov3.weights",
+                "threshold": 0.8,
+                "confidence":0.4,
+                "labelsPath":"darkflow/coco.names"
+            }
+

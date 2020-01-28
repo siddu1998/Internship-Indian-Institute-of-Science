@@ -70,17 +70,16 @@ def image_subtraction(path_image1,path_image2):
     img1 = cv2.imread(path_image1)
     img2 = cv2.imread(path_image2)
 
-    img1=cv2.resize(img1,(800,600))
-    img2=cv2.resize(img2,(800,600))
 
     start_time=time.time()
     grayA = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     grayB = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
-    (score, diff) = compare_ssim(grayA, grayB, full=True)
-    diff = (diff * 255).astype("uint8")
+    (score, grad,diff) = compare_ssim(grayA, grayB, full=True,gradient=True)
+    diff = (diff * 255).astype("uint8") 
+    #value ranges between -1 to 1, 1 indicates a perfect match
     print("SSIM: {}".format(score))
-    
+    #print('grad: {}'.format(grad))
 
     thresh = cv2.threshold(diff, 0, 255,cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1] 
     cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -105,9 +104,13 @@ def image_subtraction(path_image1,path_image2):
         
         cv2.rectangle(img1, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cv2.rectangle(img2, (x, y), (x + w, y + h), (0, 0, 255), 2)
-    
+
+    img1=cv2.resize(img1,(600,400))
+    img2=cv2.resize(img2,(600,400))    
     cv2.imshow("Scene 1", img1)
     cv2.imshow("Scene 2", img2)
+ 
+    diff=cv2.resize(diff,(600,400))
     #cv2.imwrite('save.jpg',diff)
     cv2.imshow("Diff", diff)
     cv2.waitKey(0)
@@ -115,8 +118,8 @@ def image_subtraction(path_image1,path_image2):
  
 
 
-image_path_1='2.jpg'
-image_path_2='4360.jpg'
+image_path_1='testing_images/16892.jpg'
+image_path_2='testing_images/4360.jpg'
 
 print(histogram_matching(image_path_1,image_path_2))
 print(image_hashing(image_path_2,image_path_2))
